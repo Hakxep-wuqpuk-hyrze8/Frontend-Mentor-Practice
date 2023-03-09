@@ -5,6 +5,15 @@ export const StyledLink = styled(Link)`
   display: flex;
   flex: none;
   align-items: center;
+
+  color: hsl(0, 0%, 50%);
+
+  font-weight: 600;
+  
+  &:hover,
+  &:active {
+    color: hsl(0, 0%, 0%);
+  }
 `;
 
 export const StyledButton = styled.button`
