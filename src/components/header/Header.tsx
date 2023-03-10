@@ -1,4 +1,5 @@
 import React from "react";
+import StyledHeader from "./Header.style";
 
 // components
 import Navlink from "./NavLink";
@@ -11,12 +12,23 @@ import Avatar from '@/assets/image-avatar.png'
 
 const Header = () => {
   return (
-    <div className="header">
-      <SVGImage src={Logo} alt="sneaker" />
-      <Navlink />
-      <SVGImage src={Cart} alt="cart" />
-      <SVGImage src={Avatar} alt="user" />
-    </div>
+    <StyledHeader>
+      <section className="left">
+        <div className="logo">
+          <SVGImage src={Logo} alt="sneaker" />
+        </div>
+        <Navlink />
+      </section>
+
+      <section className="right">
+        <div className="cart">
+          <SVGImage src={Cart} alt="cart" />
+        </div>
+        <div className="avatar">
+          <SVGImage src={Avatar} alt="user" />
+        </div>
+      </section>
+    </StyledHeader>
   );
 };
 

@@ -9,7 +9,9 @@ const Navlink: React.FC = () => {
       {
         links.map((link: linkType) => {
           const { id, text, url } = link;
-          return <StyledLink key={id} to={url}>{text}</StyledLink>
+          return <div className='underline'>
+            <StyledLink className='underline-link' key={id} to={url}>{text}</StyledLink>
+          </div>
         })
       }
     </StyledNavLink>

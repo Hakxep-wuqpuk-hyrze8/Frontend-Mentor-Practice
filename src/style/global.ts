@@ -1,6 +1,18 @@
 import { createGlobalStyle } from "styled-components";
 import { theme } from './theme';
 
+/**
+  * CSS 屬性排序
+  * class {
+  *  Position
+  *  flex or grid
+  *  box modal
+  *  color and style 
+  *  text
+  *  other
+  * }
+ */
+
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -56,10 +68,19 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
-  .img {
-    width: 100%;
-    display: block;
+  img,
+  video,
+  iframe {
+    max-inline-size: 100%;
+    block-size: auto;
     object-fit: cover;
+  }
+
+  .unselected {
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
   }
 
   .text {

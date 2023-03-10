@@ -2,9 +2,13 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const StyledLink = styled(Link)`
+  position: relative;
+
   display: flex;
   flex: none;
   align-items: center;
+
+  width: fit-content;
 
   color: hsl(0, 0%, 50%);
 
@@ -13,6 +17,18 @@ export const StyledLink = styled(Link)`
   &:hover,
   &:active {
     color: hsl(0, 0%, 0%);
+  }
+`;
+
+export const StyledLinkWithUnderLine = styled(StyledLink)`
+  &::after {
+    content: '';
+    position: absolute;
+    top: 7.5vh;
+    width: 100%;
+    height: 0.2em;
+    background-color: ${props => props.theme.colors.primary};
+    cursor: auto;
   }
 `;
 
