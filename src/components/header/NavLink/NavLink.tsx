@@ -10,9 +10,7 @@ const Navlink: React.FC = () => {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     id: number
   ) => {
-    event.preventDefault();
     setActiveLink(id);
-    console.log("0.0");
   };
 
   return (
