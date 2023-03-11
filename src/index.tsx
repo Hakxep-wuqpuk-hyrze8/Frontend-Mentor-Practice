@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { ThemeProvider } from 'styled-components';
@@ -20,7 +20,13 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "collections",
+        element: <h1>Collections</h1>,
+      },
+    ],
   }
 ])
 

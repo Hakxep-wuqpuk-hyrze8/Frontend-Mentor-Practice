@@ -14,13 +14,20 @@ const StyledNavLink = styled.div`
   
   background-color: ${props => props.theme.colors.backgroundColor};
 
-  .underline {
-    width: fit-content;
-  }
-
   .underline-link:active::after,
   .underline-link:hover::after {
     content: '';
+    position: absolute;
+    top: 7.9vh;
+    width: 100%;
+    height: 0.25em;
+    border-radius: ${props => props.theme.border.radius};
+    background-color: ${props => props.theme.colors.primary};
+    transition: ${props => props.theme.transition.default};
+  }
+
+  .active::after {
+    content: "";
     position: absolute;
     top: 7.9vh;
     width: 100%;
