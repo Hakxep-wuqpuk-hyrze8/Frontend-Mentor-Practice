@@ -5,17 +5,21 @@
  */
 
 const size = {
-  sm: '375px', // mobile screen
+  xs: '375px', // for mobile screen
+  sm: '600px', // for mobile screen
+  md: '900px', // for tablets
   lg: '1440px'  // desktop
 }
 
 export const device = {
-  sm: `(max-width: ${size.sm})`,
-  lg: `(max-width: ${size.lg})`,
+  xs: `(min-width: ${size.xs})`,
+  sm: `(min-width: ${size.sm})`,
+  md: `(min-width: ${size.md})`,
+  lg: `(min-width: ${size.lg})`,
 }
 
 // xs: '400px', // for small screen mobile
-// sm: '600px', // for mobile screen
+
 // md: '900px', // for tablets
 // lg: '1280px', // for laptops
 // xl: '1440px', // for desktop / monitors

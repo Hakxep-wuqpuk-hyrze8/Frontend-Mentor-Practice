@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { device } from '@/style/breakpoints';
 
 const StyledHeader = styled.div`
   position: relative;
@@ -10,30 +11,29 @@ const StyledHeader = styled.div`
   height: 15vh;
   margin: 0 auto;
 
+  // 分成左右部分
   .left {
     display: flex;
     align-items: center;
-
   }
 
   .right {
     display: flex;
     align-items: center;
     gap: 3em;
-
   }
 
+  // 照片
   .logo {
-    width: 10vw;
-    max-inline-size: 10em;
+    inline-size: 10em;
+    margin-inline-end: 4em;
     cursor: pointer;
   }
   .cart {
     cursor: pointer;
   }
   .avatar {
-    width: 3.5vw;
-    max-width: 4em;
+    inline-size: 3.5em;
     cursor: pointer;
 
     &:hover,
@@ -44,6 +44,7 @@ const StyledHeader = styled.div`
     }
   }
 
+  // header 下的線條
   ::after {
     content: '';
     position: absolute;

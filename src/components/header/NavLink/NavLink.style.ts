@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '@/style/breakpoints';
 
 const StyledNavLink = styled.div`
   position: relative;
@@ -9,8 +10,8 @@ const StyledNavLink = styled.div`
   align-items: center;
 
   width: 40vw;
-  max-width: 35em;
-  padding: 1em;
+  max-inline-size: 35em;
+  gap: 1em;
   
   background-color: ${props => props.theme.colors.backgroundColor};
 
@@ -25,6 +26,15 @@ const StyledNavLink = styled.div`
     border-radius: ${props => props.theme.border.radius};
     background-color: ${props => props.theme.colors.primary};
     transition: ${props => props.theme.transition.default};
+  }
+
+  @media ${device.sm} {
+    display: none;
+  }
+
+  @media ${device.md} {
+    display: flex;
+    gap: 2em;
   }
 `;
 
