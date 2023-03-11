@@ -12,14 +12,14 @@ const size = {
 }
 
 export const device = {
-  xs: `(min-width: ${size.xs})`,
-  sm: `(min-width: ${size.sm})`,
-  md: `(min-width: ${size.md})`,
-  lg: `(min-width: ${size.lg})`,
+  xs: `(min-width: ${0})`,
+  sm: `(min-width: ${size.xs})`,
+  md: `(min-width: ${size.sm})`,
+  lg: `(min-width: ${size.md})`,
+  xxl: `(min-width: ${size.lg})`,
 }
 
 // xs: '400px', // for small screen mobile
-
 // md: '900px', // for tablets
 // lg: '1280px', // for laptops
 // xl: '1440px', // for desktop / monitors

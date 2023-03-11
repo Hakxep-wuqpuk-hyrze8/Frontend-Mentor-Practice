@@ -23,7 +23,7 @@ const StyledHeader = styled.div`
     gap: 3em;
   }
 
-  // 照片
+  // component
   .logo {
     inline-size: 10em;
     margin-inline-end: 4em;
@@ -41,6 +41,14 @@ const StyledHeader = styled.div`
       outline: 2px ${props => props.theme.colors.primary} solid;
       outline-offset: -2px;
       border-radius: 50%;
+    }
+  }
+  .menu {
+    margin-inline-end: 1em;
+    scale: 1.2;
+
+    @media ${device.lg} {
+      display: none;
     }
   }
 

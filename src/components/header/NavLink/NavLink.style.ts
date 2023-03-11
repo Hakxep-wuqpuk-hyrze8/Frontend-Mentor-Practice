@@ -28,11 +28,11 @@ const StyledNavLink = styled.div`
     transition: ${props => props.theme.transition.default};
   }
 
-  @media ${device.sm} {
+  @media ${device.xs} {
     display: none;
   }
 
-  @media ${device.md} {
+  @media ${device.lg} {
     display: flex;
     gap: 2em;
   }

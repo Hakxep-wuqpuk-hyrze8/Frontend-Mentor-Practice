@@ -9,12 +9,16 @@ import SVGImage from "../ui/SVGimage";
 import Logo from '@/assets/logo.svg'
 import Cart from '@/assets/icon-cart.svg'
 import Avatar from '@/assets/image-avatar.png'
+import Menu from '@/assets/icon-menu.svg';
 import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <StyledHeader>
       <section className="left">
+        <div className="menu">
+          <SVGImage src={Menu} alt="menu"></SVGImage>
+        </div>
         <div className="logo">
           <Link to='/'>
             <SVGImage src={Logo} alt="sneaker" />
