@@ -2,7 +2,7 @@ import React from "react";
 import StyledHeader from "./Header.style";
 
 // components
-import Navlink from "./NavLink";
+import Navlink from "./navLink";
 import SVGImage from "../ui/SVGimage";
 
 // images
@@ -12,7 +12,7 @@ import Avatar from '@/assets/image-avatar.png'
 import Menu from '@/assets/icon-menu.svg';
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <StyledHeader>
       <section className="left">
@@ -35,7 +35,7 @@ const Header = () => {
         </div>
         <div className="avatar">
           <Link to='/user'>
-            <SVGImage src={Avatar} alt="user" />
+            <img src={Avatar} alt="user" />
           </Link>
         </div>
       </section>

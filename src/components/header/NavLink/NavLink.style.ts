@@ -20,9 +20,9 @@ const StyledNavLink = styled.div`
   .active::after {
     content: '';
     position: absolute;
-    top: 7.9vh;
+    top: 8vh;
     width: 100%;
-    height: 0.25em;
+    height: 0.22em;
     border-radius: ${props => props.theme.border.radius};
     background-color: ${props => props.theme.colors.primary};
     transition: ${props => props.theme.transition.default};

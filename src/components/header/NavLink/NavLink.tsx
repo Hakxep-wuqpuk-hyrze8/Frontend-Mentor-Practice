@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { links, linkType } from "@/data/links";
+import { links } from "@/data/links";
 import { StyledLink } from "../../ui/Button/Button.style";
 import StyledNavLink from "./NavLink.style";
+import { linkType } from "@/types/Link";
 
 const Navlink: React.FC = () => {
   const [activeLink, setActiveLink] = useState<number>();

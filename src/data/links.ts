@@ -1,10 +1,4 @@
-export interface linkType {
-  id: number,
-  text: string,
-  url: string,
-}
-
-type linksType = Array<linkType>; 
+import { linksType } from "@/types/Link"
 
 export const links: linksType = [
  {
