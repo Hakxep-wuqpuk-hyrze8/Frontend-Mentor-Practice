@@ -6,9 +6,9 @@ interface Props {
 };
 
 const SVGImage: React.FC<Props> = ({ src, alt }) => (
-  <object type="image/svg+xml" data={src} aria-label={alt}>
-    <img src={src} alt={alt} />
-  </object>
+  // <object type="image/svg+xml" data={src} aria-label={alt}>
+  <img src={src} alt={alt} />
+  // </object>
 );
 
 export default SVGImage;

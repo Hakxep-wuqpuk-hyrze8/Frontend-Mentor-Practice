@@ -11,6 +11,8 @@ const StyledHeader = styled.div`
   height: 15vh;
   margin: 0 auto;
 
+  user-select: none;
+
   // 分成左右部分
   .left {
     display: flex;
@@ -44,7 +46,12 @@ const StyledHeader = styled.div`
     }
   }
   .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
     margin-inline-end: 1em;
+    background-color: inherit;
     scale: 1.2;
 
     @media ${device.lg} {

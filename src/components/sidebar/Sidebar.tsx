@@ -1,20 +1,36 @@
-import React from 'react'
-import SVGImage from '../ui/SVGimage'
-import StyledSidabar from './Sidebar.style';
-import Close from '../../assets/icon-close.svg';
-import SidebarLink from './sidebarLink/SidebarLink';
-import StyledSidebar from './Sidebar.style';
+import React from "react";
+import StyledSidebar from "./Sidebar.style";
+import Close from "../../assets/icon-close.svg";
+
+// component
+import SVGImage from "../ui/SVGimage";
+import SidebarLink from "./sidebarLink/SidebarLink";
+
+// redux
+import { useAppSelector } from "@/app/hooks";
+import {
+  selectIsOpen,
+  toggleSidebar,
+} from "./../../feature/sidebar/sidebarSlice";
+import { useAppDispatch } from "./../../app/hooks";
 
 const Sidebar = () => {
-  return (
-    <StyledSidebar>
-      <div className='close-icon'>
-        <SVGImage src={Close} alt='Close'></SVGImage>
-      </div>
-      <SidebarLink />
-      <div className='sidebar-overlap'></div>
-    </StyledSidebar>
-  )
-}
+  const isOpen = useAppSelector(selectIsOpen);
+  const diapatch = useAppDispatch();
 
-export default Sidebar
+  const handleClose = () => {
+    diapatch(toggleSidebar());
+  };
+
+  return (
+    <StyledSidebar isOpen={isOpen}>
+      <button className="close-icon" type="button" onClick={handleClose}>
+        <SVGImage src={Close} alt="Close"></SVGImage>
+      </button>
+      <SidebarLink />
+      <div className="sidebar-overlap"></div>
+    </StyledSidebar>
+  );
+};
+
+export default Sidebar;

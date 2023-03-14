@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import StyledHeader from "./Header.style";
 
 // components
@@ -10,15 +11,27 @@ import Logo from '@/assets/logo.svg'
 import Cart from '@/assets/icon-cart.svg'
 import Avatar from '@/assets/image-avatar.png'
 import Menu from '@/assets/icon-menu.svg';
-import { Link } from "react-router-dom";
+
+// redux
+import { useAppDispatch } from './../../app/hooks';
+import { toggleSidebar } from "@/feature/sidebar/sidebarSlice";
 
 const Header: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  const handleMenuClick = () => {
+    console.log('0.0');
+    dispatch(toggleSidebar());
+  }
+
   return (
     <StyledHeader>
       <section className="left">
-        <div className="menu">
-          <SVGImage src={Menu} alt="menu"></SVGImage>
-        </div>
+
+        <button className="menu" type="button" onClick={handleMenuClick}>
+          <SVGImage src={Menu} alt="menu" />
+        </button>
+
         <div className="logo">
           <Link to='/'>
             <SVGImage src={Logo} alt="sneaker" />
@@ -39,7 +52,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
       </section>
-    </StyledHeader>
+    </StyledHeader >
   );
 };
 

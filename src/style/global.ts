@@ -14,8 +14,6 @@ import { theme } from './theme';
  */
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
   body {
     font-family: ${theme.fonts.family};
     font-size: ${theme.fonts.baseSize};
@@ -74,6 +72,24 @@ const GlobalStyle = createGlobalStyle`
     max-inline-size: 100%;
     block-size: auto;
     object-fit: cover;
+
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
+
+  button {
+    border: 0;
+    padding: 0;
+    width: fit-content;
+    background-color: inherit;
+    cursor: pointer;
+
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
   }
 
   .unselected {
