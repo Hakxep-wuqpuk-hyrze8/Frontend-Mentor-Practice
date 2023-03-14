@@ -14,7 +14,10 @@ import {
 } from 'react-router-dom';
 
 import Root from './root';
+
+// page
 import ErrorPage from './pages/error-page';
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,10 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        index: true,
+        element: <Home />,
+      },
       {
         path: "collections",
         element: <h1>Collections</h1>,
