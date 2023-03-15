@@ -24,11 +24,13 @@ const Sidebar = () => {
 
   return (
     <StyledSidebar isOpen={isOpen}>
-      <button className="close-icon" type="button" onClick={handleClose}>
-        <SVGImage src={Close} alt="Close"></SVGImage>
-      </button>
-      <SidebarLink />
-      <div className="sidebar-overlap"></div>
+      <div className="sidebar-inner">
+        <button className="close-icon" type="button" onClick={handleClose}>
+          <SVGImage src={Close} alt="Close"></SVGImage>
+        </button>
+        <SidebarLink />
+      </div>
+      <div className="backdrop"></div>
     </StyledSidebar>
   );
 };
