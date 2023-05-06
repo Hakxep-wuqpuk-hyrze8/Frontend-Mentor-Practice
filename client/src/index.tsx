@@ -17,7 +17,7 @@ import Root from './root';
 
 // page
 import ErrorPage from './pages/error-page';
-import Home from './pages/Home';
+import Home from './pages/home/Home';
 
 const router = createBrowserRouter([
   {
