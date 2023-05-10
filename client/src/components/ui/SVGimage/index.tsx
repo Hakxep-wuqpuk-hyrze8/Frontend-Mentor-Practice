@@ -1,14 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 
-interface Props {
-  src: string;
-  alt: string;
-};
 
-const SVGImage: React.FC<Props> = ({ src, alt }) => (
+const SVGImage = ({ ...props }) => (
   // <object type="image/svg+xml" data={src} aria-label={alt}>
-  <img src={src} alt={alt} />
+  <img {...props} />
   // </object>
 );
 
 export default SVGImage;
+

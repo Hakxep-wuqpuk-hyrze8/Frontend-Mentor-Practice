@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { device } from "@/style/breakpoints";
 
 // components
-import Navlink from "./NavLink/index";
+import Navlink from "./navLink/index";
 import SVGImage from "../ui/SVGimage";
 
 // images
@@ -21,7 +21,6 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const handleMenuClick = () => {
-    console.log('0.0');
     dispatch(toggleSidebar());
   }
 

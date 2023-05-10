@@ -1,0 +1,20 @@
+{
+  "name": "frontend-mentor-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hakxep-wuqpuk-hyrze8/Frontend-Mentor-Practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hakxep-wuqpuk-hyrze8/Frontend-Mentor-Practice/issues"
+  },
+  "homepage": "https://github.com/Hakxep-wuqpuk-hyrze8/Frontend-Mentor-Practice#readme"
+}

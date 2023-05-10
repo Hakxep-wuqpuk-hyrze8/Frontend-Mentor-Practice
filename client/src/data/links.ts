@@ -1,4 +1,4 @@
-import { linksType } from "@/types/Link"
+import { linksType } from "@/types/link"
 
 export const links: linksType = [
  {

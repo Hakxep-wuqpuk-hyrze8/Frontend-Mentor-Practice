@@ -98,13 +98,6 @@ const GlobalStyle = createGlobalStyle`
     user-select: none; /* Standard */
   }
 
-  .unselected {
-    -webkit-user-select: none; /* Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-  }
-
   .text {
     margin-bottom: 1.5rem;
     max-width: 40em;
