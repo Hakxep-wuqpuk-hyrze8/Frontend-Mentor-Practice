@@ -4,38 +4,39 @@ import { ProductType } from '@/types/product';
 import styled from 'styled-components';
 import { unselectable } from '@/style';
 
+type ImageType = {
+  src: string;
+  alt?: string;
+}
+
 const Carousel = () => {
-  const defaultSelected: ProductType = {
-    id: products[0].id,
-    src: products[0].src,
-    alt: products[0].alt
+  const defaultSelected: ImageType = { src: products[0].src[0], alt: products[0].alt };
+
+  const [selectImage, setSelectImage] = React.useState<ImageType>(defaultSelected);
+
+  const renderBarItems = (imgSrc: string[], alt?: string) => {
+    return imgSrc.map((src: string, index: number) => {
+      return (
+        <StyledBarItemWrapper key={index} selected={selectImage.src === src}>
+          <StyledBarItem
+            src={src}
+            alt={`${alt}${index}`}
+            onClick={() => setSelectImage({ src: src, alt: alt })}
+            selected={selectImage.src === src}
+          />
+        </StyledBarItemWrapper>
+      )
+    })
   }
-
-  const [select, setSelect] = React.useState<ProductType>(defaultSelected);
-
-  console.log(select);
 
   return (
     <StyledCarousel>
       {/* large image show product */}
-      <StyledMainImg src={select.src} alt={select.alt} />
+      <StyledMainImg src={selectImage.src} alt={selectImage.alt || 'Product'} />
 
       {/* show bar choose product */}
       <StyledBarWrapper>
-        {products.map((product: ProductType) => {
-          const { id, src, alt } = product;
-          return (
-            <StyledBarItemWrapper selected={select.id === id}>
-              <StyledBarItem
-                key={id}
-                src={src}
-                alt={alt}
-                onClick={() => setSelect(product)}
-                selected={select.id === id}
-              />
-            </StyledBarItemWrapper>
-          )
-        })}
+        {renderBarItems(products[0].src, products[0].alt)}
       </StyledBarWrapper>
     </StyledCarousel >
   )
