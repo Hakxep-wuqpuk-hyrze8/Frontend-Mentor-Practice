@@ -1,10 +1,6 @@
 import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { ThemeProvider } from 'styled-components';
-import { theme } from './style/theme';
-import GlobalStyle from './style/global';
-
 import store from './app/store';
 import { Provider } from 'react-redux';
 
@@ -16,8 +12,8 @@ import {
 import Root from './root';
 
 // page
-import ErrorPage from './pages/error-page';
-import Home from './pages/home/Home';
+import ErrorPage from './pages/Error';
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
   {
@@ -40,10 +36,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <RouterProvider router={router}></RouterProvider>
-      </ThemeProvider>
+      <RouterProvider router={router}></RouterProvider>
     </Provider>
   </React.StrictMode>,
 )

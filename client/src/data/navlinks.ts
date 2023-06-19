@@ -1,28 +1,28 @@
-import { linksType } from "@/types/link"
+import { NavlinksType } from "@/types/components/NavLink"
 
-export const links: linksType = [
+export const navlinks: NavlinksType = [
  {
-  id: 1,
+  id: '1',
   text: 'collections',
   url: '/collections'
  },
  {
-  id: 2,
+  id: '2',
   text: 'men',
   url: '/men'
  },
  {
-  id: 3,
+  id: '3',
   text: 'women',
   url: '/women'
  },
  {
-  id: 4,
+  id: '4',
   text: 'about',
   url: '/about'
  },
  {
-  id: 5,
+  id: '5',
   text: 'contact',
   url: '/contact'
  },

@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom';
-import Header from './components/header';
-import Sidebar from './components/sidebar/Sidebar';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <>
-      <Header />
-      <Sidebar />
+      <Navbar />
       <Outlet />
     </>
   )
