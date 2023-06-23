@@ -1,20 +1,19 @@
-import { DataTypes, Model, Optional } from "sequelize";
-import sequelize from "../db/sequelize";
+import { DataTypes, Model, Optional } from 'sequelize';
+import sequelize from './../db/sequelize';
 
-// 定義產品模型
 interface ProductAttributes {
   id: number;
   name: string;
-  description: string;
-  company: string;
+  description?: string;
+  company?: string;
   price: number;
-  discount: number;
-  images: Buffer[];
+  discount?: number;
+  images?: Buffer[];
 }
 
 interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> {}
 
-class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
+export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
   public id!: number;
   public name!: string;
   public description!: string;
@@ -27,41 +26,39 @@ class Product extends Model<ProductAttributes, ProductCreationAttributes> implem
   public readonly updatedAt!: Date;
 }
 
-Product.init({
-  id: { 
-    type: DataTypes.NUMBER,
-    autoIncrement: true,
-    primaryKey: true,
+Product.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      defaultValue: 'Product description...',
+    },
+    company: {
+      type: DataTypes.STRING,
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    discount: {
+      type: DataTypes.FLOAT,
+    },
+    images: {
+      type: DataTypes.ARRAY(DataTypes.BLOB),
+    },
   },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: "Product description...",
-  },
-  company: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  price: {
-    type: DataTypes.NUMBER,
-    allowNull: false,
-  },
-  discount: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
-  },
-  images: {
-    type: DataTypes.ARRAY(DataTypes.BLOB),
-    allowNull: false,
+  {
+    sequelize,
+    modelName: 'Product',
   }
-}, {
-  sequelize,
-  modelName: "Product",
-});
+);
 
-
-export { Product, ProductAttributes, ProductCreationAttributes };
+export { ProductCreationAttributes };

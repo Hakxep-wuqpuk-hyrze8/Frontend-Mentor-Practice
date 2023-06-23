@@ -1,8 +1,15 @@
 import express from "express";
+
+import { createProducts, deleteProduct, getAllProducts } from "../controllers/product";
+import { validateCreateProduct, validateDeleteProduct } from "../middleware/validate/product";
+
+
 const router = express.Router();
 
-import { createProducts, getAllProducts } from "../controllers/product";
 
-router.route("/product").get(getAllProducts).post(createProducts);
+router.route("/product")
+  .get(getAllProducts)
+  .post(validateCreateProduct, createProducts)
+  .delete(validateDeleteProduct, deleteProduct);
 
 export default router;

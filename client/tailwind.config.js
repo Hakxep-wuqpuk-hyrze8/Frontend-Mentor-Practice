@@ -10,10 +10,15 @@ export default {
         'dark-grayish-blue': 'hsl(219, 9%, 45%)',
         'grayish-blue': 'hsl(220, 14%, 75%)',
         'light-grayish-blue': 'hsl(223, 64%, 98%)',
-        'black-opacity-75': 'hsla(0, 0%, 0%, 0.75)',
-      }
+      },
+      fontFamily: {
+        kumbh: ['Kumbh Sans', 'sans-serif'],
+      },
+      /* 添加自定义的 utilities */
+      /* 请确保这段代码在主题的 extend 中 */
+      /* 如果你的 CSS 文件与 tailwind.config.js 文件分开，请将该代码添加到你的 CSS 文件中 */
+      /* 这里的代码会生成 before-bottom-calc 类 */
     },
   },
   plugins: [],
-}
-
+};
