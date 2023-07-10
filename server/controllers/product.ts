@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { Product, ProductCreationAttributes } from '../models/product';
+import { Product,  } from '../models/product';
 import sequelize from "../db/sequelize";
+import { ProductCreationAttributes } from "../types/product";
 
 // @desc Get all Products 
 // @route GET /api/v1/product
@@ -10,12 +11,20 @@ export const getAllProducts = async (req: Request, res: Response) => {
   res.status(200).json(products);
 };
 
+// @desc Get a Product 
+// @route GET /api/v1/product
+// @access Private
+export const getProduct = async (req: Request, res: Response) => {
+  const productId = req.params.id;
+  const product = await Product.findByPk(productId);
+  res.status(200).json(product);
+};
+
 
 // @desc post product 
 // @route POST /api/v1/product
 export const createProducts = async (req: Request, res: Response) => {
   const { name, description, company, price, discount } = req.body;
-  const files = req.files as Express.Multer.File[];
 
   // 同步資料庫和模型
   await sequelize.sync();
@@ -27,18 +36,30 @@ export const createProducts = async (req: Request, res: Response) => {
     company,
     price,
     discount,
-    images: files.map(file => file.buffer)
   };
 
   // 插入產品到資料庫
   const product = await Product.create(newProduct);
-  res.status(201).json(newProduct);
+  res.status(201).json(product);
 };
 
 // @desc update product 
 // @route UPDATE /api/v1/product
 // @access Private
-export const updateProducts = async (req: Request, res: Response) => {
+export const updateProduct = async (req: Request, res: Response) => {''
+  const product = req.body;
+  const productId = req.params.id;
+
+  const updatedProduct = await Product.update(product, {
+    where: {
+      id: productId
+    }
+  });
+
+  if (updatedProduct) {
+    const product = await Product.findByPk(productId);
+    res.status(200).json(product);
+  }
 };
 
 // @desc Delete Product 

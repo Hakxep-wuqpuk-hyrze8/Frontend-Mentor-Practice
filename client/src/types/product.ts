@@ -5,7 +5,6 @@ export interface ProductType {
   company: string,
   price: number,
   discount: number,
-  src: string[],
-  alt?: string,
 }
 export type ProductsType = Array<ProductType>;  
+

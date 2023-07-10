@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <Product />,
       }
     ],
-  }
+  },
 ])
 
 export default router;

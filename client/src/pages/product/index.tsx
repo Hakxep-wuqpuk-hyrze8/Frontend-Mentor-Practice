@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, LoaderFunction, useParams, useNavigate } from 'react-router-dom';
 
 import Plus from '@/assets/icon-plus.svg';
 import Minus from '@/assets/icon-minus.svg';
 import Cart from '@/assets/icon-cart.svg';
+
+import { useGetProductQuery } from '@/feature/api/apiSlice';
 
 import Product1 from '@/assets/image-product-1.jpg';
 import Product2 from '@/assets/image-product-2.jpg'
@@ -14,10 +16,34 @@ import ThumbnailProduct1 from '@/assets/image-product-1-thumbnail.jpg';
 import ThumbnailProduct2 from '@/assets/image-product-2-thumbnail.jpg'
 import ThumbnailProduct3 from '@/assets/image-product-3-thumbnail.jpg'
 import ThumbnailProduct4 from '@/assets/image-product-4-thumbnail.jpg'
-import content from './../../svg.d';
+import CartIcon from '@/components/CartIcon';
+import ErrorPage from '../Error';
+import LoadingPage from '../Loading';
 
-const Home = () => {
+const productLoader: LoaderFunction = ({ request, params }) => {
+  const id = params.id;
+  return useGetProductQuery(Number(id));
+}
+
+const Product = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [mainImg, setMainImg] = useState<string>(Product1);
+
+  console.log(id);
+
+  const { data: product, isLoading, isFetching, isError } = useGetProductQuery(Number(id));
+
+  console.log(product);
+
+  if (isError || !product) {
+    return <ErrorPage />;
+  }
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
 
   return (
     <div className='container flex flex-row w-10/12 mx-auto mt-6'>
@@ -30,16 +56,16 @@ const Home = () => {
         {/* nav img */}
 
         <div className='flex flex-row justify-center gap-8'>
-          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-lg hover:before:block hover:before:border-2 before:border-primary'>
+          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-xl hover:before:block hover:before:border-2 before:border-primary before:opacity-50'>
             <img className='rounded-xl hover:opacity-25' src={ThumbnailProduct1} alt="sneaker"></img>
           </div>
-          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-lg hover:before:block hover:before:border-2 before:border-primary'>
+          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-xl hover:before:block hover:before:border-2 before:border-primary before:opacity-50'>
             <img className='rounded-xl hover:opacity-25' src={ThumbnailProduct2} alt="sneaker"></img>
           </div>
-          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-lg hover:before:block hover:before:border-2 before:border-primary'>
+          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-xl hover:before:block hover:before:border-2 before:border-primary before:opacity-50'>
             <img className='rounded-xl hover:opacity-25' src={ThumbnailProduct3} alt="sneaker"></img>
           </div>
-          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-lg hover:before:block hover:before:border-2 before:border-primary'>
+          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-xl hover:before:block hover:before:border-2 before:border-primary before:opacity-50'>
             <img className='rounded-xl hover:opacity-25' src={ThumbnailProduct4} alt="sneaker"></img>
           </div>
         </div>
@@ -50,12 +76,16 @@ const Home = () => {
       <div className='w-4/12 flex justify-center items-center ml-16'>
         <div className='w-full flex flex-col gap-4'>
           {/* company */}
-          <h4 className='text-medium font-extrabold text-primary tracking-wider uppercase'>Sneaker Company</h4>
+          <h4 className='text-medium font-extrabold text-primary tracking-wider uppercase'>
+            {product.company}
+          </h4>
           {/* title */}
-          <h1 className='font-bold font-kumbh leading-12 text-5xl'>Fall Limited Edition Sneakers</h1>
+          <h1 className='font-bold font-kumbh leading-12 sm:text-3xl md:text-5xl'>
+            {product.name}
+          </h1>
           {/* desc */}
           <p className='font-kumbh text-gray-400 leading-6'>
-            These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.
+            {product.discription}
           </p>
 
           {/* price section */}
@@ -63,11 +93,17 @@ const Home = () => {
 
             {/* price and discount */}
             <div className='flex flex-row gap-6 items-center'>
-              <span className='text-2xl font-bold font-kumbh'>$125.00</span>
-              <span className='font-bold font-kumbh text-primary bg-secondary px-2 py-1 rounded-lg'>50%</span>
+              <span className='text-2xl font-bold font-kumbh'>
+                ${(product.price * product.discount / 100).toFixed(2)}
+              </span>
+              <span className='font-bold font-kumbh text-primary bg-secondary px-2 py-1 rounded-lg'>
+                {product.discount}%
+              </span>
             </div>
             {/* originPrice */}
-            <span className='font-bold font-kumbh text-gray-400 opacity-75 line-through'>$250.00</span>
+            <span className='font-bold font-kumbh text-gray-400 opacity-75 line-through'>
+              ${(product.price).toFixed(2)}
+            </span>
 
           </div>
 
@@ -79,7 +115,7 @@ const Home = () => {
                   <img className='m-auto' src={Minus} alt='+'></img>
                 </button>
 
-                <input type="number" className="select-none pl-1 outline-none focus:outline-none text-center w-full bg-light-grayish-blue font-semibold text-md md:text-basecursor-default flex items-center" name="input-number" value="0">
+                <input type="number" className="select-none pl-4 outline-none focus:outline-none text-center w-full bg-light-grayish-blue font-semibold font-kumbh text-md md:text-basecursor-default flex items-center" name="input-number" defaultValue={0}>
                 </input>
 
                 <button type='button' data-action="increment" className="select-none bg-light-grayish-blue hover:opacity-50 h-full w-20 rounded-r cursor-pointer">
@@ -89,7 +125,7 @@ const Home = () => {
             </div>
 
             <button type="submit" className="w-7/12 flex flex-row justify-center items-center gap-4 rounded-lg bg-primary hover:opacity-50 text-white" >
-              <img src={Cart} alt='cart' ></img>
+              <CartIcon color='white' />
               <h6 className='font-bold font-kumbh'>
                 Add to cart
               </h6>
@@ -101,4 +137,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default Product;
