@@ -6,6 +6,7 @@ import cors from "cors";
 
 import productRouter from './routes/product';
 import imageRouter from './routes/image';
+import image2Router from './routes/image2';
 
 import notFoundMiddleware from './middleware/errorHandle/notFound';
 import errorHandlerMiddleware from './middleware/errorHandle/errorHandler';
@@ -22,6 +23,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/image", imageRouter);
+app.use("/api/v2/image", image2Router);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
@@ -29,6 +31,14 @@ app.use(errorHandlerMiddleware);
 // Server configuration
 const port = process.env.PORT || 8000;
 
+// sequelize.sync({ force: true })
+//   .then(() => {
+//     console.log('Database has been synchronized.');
+//   })
+//   .catch((error) => {
+//     console.error('Failed to synchronize database:', error);
+//   });
+  
 const startServer = async () => {
   try {
     await sequelize.authenticate();

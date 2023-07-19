@@ -5,7 +5,7 @@ import { Product } from "./product";
 
 class Image extends Model<ImageAttributes, ImageCreationAttributes> implements ImageAttributes {
   public id!: number;
-  public image!: Buffer;
+  public data!: Buffer;
   public productId!: ForeignKey<Product['id']>;
 
   declare owner?: NonAttribute<Product>;
@@ -21,7 +21,7 @@ Image.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    image: {
+    data: {
       type: DataTypes.BLOB,
       allowNull: false,
     },

@@ -1,73 +1,83 @@
 import React, { useState } from 'react'
-import { Link, LoaderFunction, useParams, useNavigate } from 'react-router-dom';
+import { LoaderFunction, useParams, redirect } from 'react-router-dom';
 
 import Plus from '@/assets/icon-plus.svg';
 import Minus from '@/assets/icon-minus.svg';
-import Cart from '@/assets/icon-cart.svg';
 
 import { useGetProductQuery } from '@/feature/api/apiSlice';
+import { useGetProductImagesQuery } from '@/feature/api/imageSlice';
 
-import Product1 from '@/assets/image-product-1.jpg';
-import Product2 from '@/assets/image-product-2.jpg'
-import Product3 from '@/assets/image-product-3.jpg'
-import Product4 from '@/assets/image-product-4.jpg'
-
-import ThumbnailProduct1 from '@/assets/image-product-1-thumbnail.jpg';
-import ThumbnailProduct2 from '@/assets/image-product-2-thumbnail.jpg'
-import ThumbnailProduct3 from '@/assets/image-product-3-thumbnail.jpg'
-import ThumbnailProduct4 from '@/assets/image-product-4-thumbnail.jpg'
 import CartIcon from '@/components/CartIcon';
 import ErrorPage from '../Error';
 import LoadingPage from '../Loading';
 
-const productLoader: LoaderFunction = ({ request, params }) => {
+export const productLoader: LoaderFunction = async ({ request, params }) => {
   const id = params.id;
-  return useGetProductQuery(Number(id));
+  if (!id || isNaN(Number(id))) {
+    return redirect('/error');
+  }
+
+  return null;
 }
 
 const Product = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
-  const [mainImg, setMainImg] = useState<string>(Product1);
+  const { data: product, isLoading: productLoading, isError: productError } = useGetProductQuery(Number(id));
+  const { data: productImages, isLoading: productImagesLoading, isError: productImagesError } = useGetProductImagesQuery(Number(id));
 
-  console.log(id);
+  const [mainImg, setMainImg] = useState<string | null>(productImages ? productImages[0].data : null);
 
-  const { data: product, isLoading, isFetching, isError } = useGetProductQuery(Number(id));
+  React.useEffect(() => {
+    if (productImages && productImages.length > 0) {
+      setMainImg(`data:image/jpeg;base64,${productImages[0].data}`);
+    }
+  }, [productImages]);
 
-  console.log(product);
-
-  if (isError || !product) {
-    return <ErrorPage />;
-  }
-
-  if (isLoading) {
+  if (productLoading || productImagesLoading) {
+    // todo: skeleton page
     return <LoadingPage />;
   }
 
+  if (productError || productImagesError || !product || !productImages) {
+    return <ErrorPage />;
+  }
+
+  const handleImageClick = (event: React.MouseEvent<HTMLImageElement>) => {
+    event.preventDefault();
+    setMainImg(event.currentTarget.src);
+  }
 
   return (
     <div className='container flex flex-row w-10/12 mx-auto mt-6'>
       {/* item image */}
       <div className='w-1/2 flex flex-col gap-6 justify-center items-center'>
         {/* main img */}
-        <div className='w-4/6'>
-          <img className='rounded-2xl' src={mainImg} alt="sneaker" />
-        </div>
+        {mainImg ?
+          <div className='w-4/6'>
+            <img className='rounded-2xl' src={mainImg} alt="sneaker" />
+          </div>
+          : null}
+
         {/* nav img */}
 
         <div className='flex flex-row justify-center gap-8'>
-          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-xl hover:before:block hover:before:border-2 before:border-primary before:opacity-50'>
-            <img className='rounded-xl hover:opacity-25' src={ThumbnailProduct1} alt="sneaker"></img>
-          </div>
-          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-xl hover:before:block hover:before:border-2 before:border-primary before:opacity-50'>
-            <img className='rounded-xl hover:opacity-25' src={ThumbnailProduct2} alt="sneaker"></img>
-          </div>
-          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-xl hover:before:block hover:before:border-2 before:border-primary before:opacity-50'>
-            <img className='rounded-xl hover:opacity-25' src={ThumbnailProduct3} alt="sneaker"></img>
-          </div>
-          <div className='w-[13.5%] relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-xl hover:before:block hover:before:border-2 before:border-primary before:opacity-50'>
-            <img className='rounded-xl hover:opacity-25' src={ThumbnailProduct4} alt="sneaker"></img>
-          </div>
+
+          {productImages.map((image) => {
+            return <div
+              key={image.id}
+              className={`w-24 relative hover:before:content-[""] hover:before:absolute hover:before:w-full hover:before:h-full hover:before:rounded-xl hover:before:block hover:before:border-2 before:border-primary before:opacity-50 hover:cursor-pointer`}>
+
+              <img
+                className='rounded-xl hover:opacity-25'
+                onClick={handleImageClick}
+                src={`data:image/jpeg;base64,${image.data}`}
+                // id={image.id.toString()}
+                alt="sneaker">
+              </img>
+
+            </div>
+          })}
+
         </div>
       </div>
 

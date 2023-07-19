@@ -3,13 +3,13 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api/v1' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api' }),
   endpoints: (builder) => ({
     getAllProduct: builder.query<ProductsType, void>({
-      query: () => '/product'
+      query: () => '/v1/product'
     }),
     getProduct: builder.query<ProductType, number>({
-      query: (productId: number) => `/product/${productId}`
+      query: (productId: number) => `/v1/product/${productId}`
     }),
   }),
 })

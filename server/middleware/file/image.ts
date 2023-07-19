@@ -18,7 +18,7 @@ const upload = multer({
 });
 
 const uploadImage = (req: Request, res: Response, next: NextFunction) => {
-  upload.single('image')(req, res, (err) => {
+  upload.single('data')(req, res, (err) => {
     if (err instanceof multer.MulterError) {
       return res.status(400).json({ error: '檔案上傳錯誤' });
     } else if (err && err.message === "檔案格式錯誤") {

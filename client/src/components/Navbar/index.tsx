@@ -7,6 +7,8 @@ import { NavLink, Link } from 'react-router-dom';
 
 
 const Navbar = () => {
+  // todo: cart reminder
+
   return (
     <>
       <div className='container w-10/12 mx-auto flex flex-row items-center justify-between pt-6 pb-8'>
@@ -39,11 +41,13 @@ const Navbar = () => {
 
         {/* right section */}
         <div className='flex flex-row '>
-          <div className='my-auto'>
+          {/* cart */}
+          <div className='hover:cursor-pointer my-auto'>
             <img className='fill-gray-900' src={Cart} alt='cart' />
           </div>
+          {/* avatar */}
           <div className='relative w-11 h-fit ml-10'>
-            <div className="hover:before:absolute hover:before:top-0 hover:before:left-0 hover:before:w-full hover:before:h-full hover:before:rounded-full hover:before:outline hover:before:outline-primary">
+            <div className="hover:cursor-pointer hover:before:absolute hover:before:top-0 hover:before:left-0 hover:before:w-full hover:before:h-full hover:before:rounded-full hover:before:outline hover:before:outline-primary">
               <img className="" src={Avatar} alt="avatar" />
             </div>
           </div>
