@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
+
 import sidebarSlice from '../feature/sidebar/sidebarSlice'
+
 import { apiSlice } from '@/feature/api/apiSlice'
 
 const store = configureStore({
